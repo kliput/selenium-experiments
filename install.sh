@@ -11,7 +11,7 @@ apt-get -y install xvfb
 
 # Python libraries
 apt-get -y install python-pil imagemagick
-pip install pyscreenshot selenium xvfbwrapper
+pip install pyscreenshot selenium xvfbwrapper pytest
 
 # Firefox
 apt-get -y install firefox
@@ -25,6 +25,7 @@ apt-get -y install google-chrome-stable
 ## Chrome driver
 wget "http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip"
 unzip chromedriver_linux64.zip
+chmod +x chromedriver
 mv chromedriver /usr/local/bin
 rm chromedriver_linux64.zip
 
@@ -32,5 +33,6 @@ rm chromedriver_linux64.zip
 # ## Opera driver
 # wget "https://github.com/operasoftware/operachromiumdriver/releases/download/v0.2.2/operadriver_linux64.zip"
 # unzip operadriver_linux64.zip
+# chmod +x operadriver
 # mv operadriver /usr/local/bin
 # rm operadriver_linux64.zip
