@@ -1,4 +1,5 @@
 from pytest_bdd import scenario, given, when, then, parsers
+import re
 
 
 class Something:
@@ -9,22 +10,36 @@ class Something:
         self.some_val += 42
 
 
-# @given("I'm visiting Onezone site")
-# def visit_onezone():
-#     print 'visiting onezone'
-#
-# @when('I go to the login page')
-# def visit_login_page():
-#     print 'visiting login page'
-#
-# @then(parsers.parse('I should see at least <btn_count> login buttons'))
-# def find_n_login_buttons(num_of_login_buttons):
-#     print 'should find {n} login buttons'.format(n=num_of_login_buttons)
-#
-# @then(parsers.parse('I should see a <provider_name> login button'))
-# def find_n_login_buttons(provider_name):
-#     # TODO
-#     print 'should find {name} login buttons'.format(name=provider_name)
+@given("I'm visiting Onezone site")
+def visit_onezone(browser):
+    # TODO: configure address of OZ
+    oz_url = 'https://veilfsdev.com'
+    browser.visit(oz_url)
+
+
+@when('I go to the <page> page')
+def visit_login_page(browser, page):
+    browser.visit(browser.url + '#' + page)
+
+
+@then(parsers.parse('The page title should contain <title>'))
+def title_matches(browser, title):
+    assert re.match(r'.*' + title + r'.*', browser.title, re.IGNORECASE)
+
+
+@then(parsers.parse('I should see at least <btn_count> login buttons'))
+def find_n_login_buttons(num_of_login_buttons):
+    print 'should find {n} login buttons'.format(n=num_of_login_buttons)
+
+
+@then(parsers.parse('I should see a <provider_name> login button'))
+def find_n_login_buttons(provider_name):
+    # TODO
+    print 'should find {name} login buttons'.format(name=provider_name)
+
+
+
+
 
 @given('I have some object')
 def some_object():
